@@ -2,14 +2,19 @@ const debug = require('debug')('app:startup');
 const express = require('express');
 const helmet = require('helmet');
 const morgan = require('morgan');
-const courses = require('./router/courses');
-const home = require('./router/home');
+const distractions = require('./router/distractions');
+const goals = require('./router/goals');
+const users = require('./router/users');
 const app = express();
 
-app.set('view engine', 'pug')
-app.set('views', './src/views')
-
 app.use(express.json())
+app.use('/users', users);
+app.use('/goals', goals);
+app.use('/distractions', distractions);
+
+app.set('view engine', 'pug');
+app.set('views', './src/views');
+
 app.use(express.urlencoded({ extended: true }))
 app.use(helmet())
 

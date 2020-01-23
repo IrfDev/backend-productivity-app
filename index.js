@@ -15,7 +15,7 @@ async function main() {
     await dbConnect()
     console.log('DB CONNECTED')
     await listenServer()
-    console.log('SERVER LISTENING')
+    console.log(`SERVER LISTENING`)
 }
 
 main()
