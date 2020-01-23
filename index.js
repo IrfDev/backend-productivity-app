@@ -3,6 +3,8 @@ require('dotenv').config()
 const dbConnect = require('./src/lib/db')
 const server = require('./src/server')
 
+// just an example in my commit
+
 const listenServer = function() {
     return new Promise((resolve, reject) => {
         server.listen(8080, () => {
