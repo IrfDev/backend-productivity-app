@@ -9,8 +9,6 @@ const app = express();
 app.set('view engine', 'pug')
 app.set('views', './src/views')
 
-app.use('/api/courses', courses)
-app.use('/', home)
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(helmet())
