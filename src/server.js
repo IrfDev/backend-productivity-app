@@ -5,12 +5,14 @@ const morgan = require('morgan');
 const distractions = require('./router/distractions');
 const goals = require('./router/goals');
 const users = require('./router/users');
+const auth = require('./Middlewares/auth');
 const app = express();
 
 app.use(express.json())
 app.use('/users', users);
 app.use('/goals', goals);
 app.use('/distractions', distractions);
+app.use('/auth', auth)
 
 app.set('view engine', 'pug');
 app.set('views', './src/views');

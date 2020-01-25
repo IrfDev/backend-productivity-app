@@ -10,6 +10,7 @@ const userSchema = new mongoose.Schema({
     email: {
         type: String,
         minlength: 5,
+        unique: true,
         maxlength: 180,
         pattern: /^.+@.+\..+$/,
         required: true
@@ -17,13 +18,13 @@ const userSchema = new mongoose.Schema({
     age: {
         type: Number,
         min: 0,
-        max: 180,
-        required: true
+        max: 180
     },
     password: {
         type: String,
         minlength: 8,
-        maxlength: 200
+        maxlength: 1040,
+        required: true
     },
     distractions: [{
         type: mongoose.Schema.Types.ObjectId,

@@ -1,5 +1,6 @@
 const express = require('express')
 const user = require('../usecases/user')
+
 const router = express.Router()
 
 router.get('/', async(req, res) => {
@@ -49,7 +50,11 @@ router.post('/', async(req, res) => {
             success: true,
             message: 'New user created',
             data: {
-                user: newUser
+                user: {
+                    name: newUser.name,
+                    age: newUser.age,
+                    email: newUser.email,
+                }
             }
         })
     } catch (error) {
