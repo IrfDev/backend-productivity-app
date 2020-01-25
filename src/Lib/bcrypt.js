@@ -1,7 +1,8 @@
 const bcrypt = require('bcrypt')
+const { SALT_ROUND } = process.env
 
 function hash(plainText) {
-    return bcrypt.hash(plainText, 10)
+    return bcrypt.hash(plainText, SALT_ROUND)
 }
 module.exports = {
     ...bcrypt,
