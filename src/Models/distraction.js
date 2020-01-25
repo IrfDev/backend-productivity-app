@@ -22,10 +22,10 @@ const distractionSchema = new mongoose.Schema({
             'película',
         ],
     },
-    user: [{
+    user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'users'
-    }],
+    },
 })
 
 module.exports = mongoose.model('Distraction', distractionSchema)

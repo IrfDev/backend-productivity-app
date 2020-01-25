@@ -1,3 +1,4 @@
+const User = require('../Models/user')
 const Distraction = require('../Models/distraction')
 
 function create({
@@ -17,19 +18,19 @@ function create({
 }
 
 function getAll() {
-    return Goal.find()
+    return Distraction.find().populate('user', '-distractions -goals', User)
 }
 
 function getById(id) {
-    return Goal.findById(id)
+    return Distraction.findById(id)
 }
 
 function deletebyId(id) {
-    return Goal.findByIdAndDelete(id)
+    return Distraction.findByIdAndDelete(id)
 }
 
 function updateById(id, distractionData) {
-    return Goal.findByIdAndUpdate(id, distractionData)
+    return Distraction.findByIdAndUpdate(id, distractionData)
 }
 
 module.exports = {

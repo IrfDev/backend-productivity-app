@@ -1,4 +1,6 @@
 const User = require('../Models/user')
+const Goal = require('../Models/goal')
+const Distraction = require('../Models/distraction')
 
 function create({
     name,
@@ -17,6 +19,8 @@ function create({
 
 function getAll() {
     return User.find()
+        .populate('goals', '-user', Goal)
+        .populate('distractions', '-user', Distraction)
 }
 
 function getById(id) {

@@ -1,5 +1,7 @@
 const express = require('express')
 const goal = require('../usecases/goal')
+const user = require('../usecases/user')
+
 const router = express.Router()
 
 router.get('/', async(req, res) => {
@@ -45,14 +47,18 @@ router.post('/', async(req, res) => {
     try {
         const newGoalData = req.body
         const newGoal = await goal.create(newGoalData)
+        const updateUser = await user.updateById(newGoal.user, {
+            $push: { goals: newGoal._id }
+        })
         res.json({
             success: true,
             message: 'New Goal created',
             data: {
-                goal: newGoal
+                goal: newGoal,
+                updateUser
             }
         })
-    } catch (eror) {
+    } catch (error) {
         res.json({
             success: false,
             message: 'Something went wrong while create a goal',
@@ -81,7 +87,7 @@ router.patch('/:id', async(req, res) => {
             }
         })
 
-    } catch (eror) {
+    } catch (error) {
         res.json({
             success: false,
             message: 'Something went wrong while create a goal',

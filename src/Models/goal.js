@@ -34,13 +34,14 @@ const goalSchema = new mongoose.Schema({
 
     },
     isAchived: {
+        default: false,
         type: Boolean,
         required: true,
     },
-    user: [{
+    user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'users'
-    }],
+    },
 })
 
 module.exports = mongoose.model('Goal', goalSchema)

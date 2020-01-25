@@ -1,24 +1,25 @@
 const Goal = require('../Models/goal')
+const User = require('../Models/user')
 
 function create({
     day,
     description,
     category,
     isAchived,
-    user,
+    user
 }) {
     const newGoal = new Goal({
         day,
         description,
         category,
         isAchived,
-        user,
+        user
     })
     return newGoal.save()
 }
 
 function getAll() {
-    return Goal.find()
+    return Goal.find().populate('user', '-distractions -goals', User)
 }
 
 function getById(id) {

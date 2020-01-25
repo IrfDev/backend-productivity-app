@@ -1,11 +1,12 @@
 const express = require('express')
 const distraction = require('../usecases/distraction')
+const user = require('../usecases/user')
 const router = express.Router()
-
 
 router.get('/', async(req, res) => {
     try {
-        const allDistractions = await distraction.getAll()
+        const allDistractions = await distraction.
+        getAll()
         res.json({
             success: true,
             message: 'All distractions',
@@ -26,11 +27,15 @@ router.post('/', async(req, res) => {
     try {
         const newDistractionData = req.body
         const newDistraction = await distraction.create(newDistractionData)
+        const updateUser = await user.updateById(newDistractionData.user, {
+            $push: { distractions: newDistraction._id }
+        })
         res.json({
             success: true,
             message: 'distraction created',
             data: {
-                distraction: newDistraction
+                distraction: newDistraction,
+                updateUser
             }
         })
     } catch (error) {
