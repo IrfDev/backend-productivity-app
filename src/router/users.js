@@ -6,7 +6,7 @@ const jwt = require('../Lib/jwt')
 
 const router = express.Router()
 
-router.get('/', [auth, authRole], async(req, res) => {
+router.get('/', [auth, authRoles], async(req, res) => {
     try {
         const allUsers = await user.getAll()
         res.json({
