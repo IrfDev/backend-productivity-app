@@ -1,10 +1,12 @@
+const auth = require('../Middlewares/auth')
+const authRoles = require('../Middlewares/authRoles')
 const express = require('express')
 const user = require('../usecases/user')
 const jwt = require('../Lib/jwt')
 
 const router = express.Router()
 
-router.get('/', async(req, res) => {
+router.get('/', [auth, authRole], async(req, res) => {
     try {
         const allUsers = await user.getAll()
         res.json({
@@ -67,6 +69,11 @@ router.post('/', async(req, res) => {
             error: error.message
         })
     }
+})
+
+router.get('/me', auth, async(req, res) => {
+    const userObject = user.getById(req.user._id).select('-password');
+    res.send(userObject)
 })
 
 router.patch('/:id', async(req, res) => {

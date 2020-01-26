@@ -26,6 +26,11 @@ const userSchema = new mongoose.Schema({
         maxlength: 1040,
         required: true
     },
+    role: {
+        type: String,
+        enum: ['admin', 'analyst'],
+        required: true
+    },
     distractions: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'distractions'

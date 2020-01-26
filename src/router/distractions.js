@@ -1,3 +1,4 @@
+const auth = require('../Middlewares/auth')
 const express = require('express')
 const distraction = require('../usecases/distraction')
 const user = require('../usecases/user')
@@ -23,7 +24,7 @@ router.get('/', async(req, res) => {
     }
 })
 
-router.post('/', async(req, res) => {
+router.post('/', auth, async(req, res) => {
     try {
         const newDistractionData = req.body
         const newDistraction = await distraction.create(newDistractionData)

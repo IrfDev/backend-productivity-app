@@ -14,7 +14,7 @@ router.post('/', async(req, res) => {
         let validPassword = await bcrypt.compare(req.body.password, user.password)
         if (!validPassword) return res.status(400).send('Invalid email or password')
 
-        const webToken = jwt.sign({ _id: user._id })
+        const webToken = jwt.sign({ _id: user._id, role: user.role })
 
         res.json({
             success: true,

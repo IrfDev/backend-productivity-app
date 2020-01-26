@@ -1,3 +1,4 @@
+const auth = require('../Middlewares/auth')
 const express = require('express')
 const goal = require('../usecases/goal')
 const user = require('../usecases/user')
@@ -44,7 +45,7 @@ router.delete('/:id', async(req, res) => {
     }
 })
 
-router.post('/', async(req, res) => {
+router.post('/', auth, async(req, res) => {
     try {
         const newGoalData = req.body
         const newGoal = await goal.create(newGoalData)

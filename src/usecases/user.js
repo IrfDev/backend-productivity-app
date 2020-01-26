@@ -19,6 +19,10 @@ async function create({
     return newUser.save()
 }
 
+function getById(id) {
+    return User.findById(id)
+}
+
 function getAll() {
     return User.find().select('name age email')
         .populate('goals', '-user', Goal)

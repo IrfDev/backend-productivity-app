@@ -2,7 +2,7 @@ const jwt = require('../Lib/jwt')
 
 function auth(req, res, next) {
     const token = req.header('x-auth-token')
-    if (!token) res.status(401).send('Access denied, you need to log in')
+    if (!token) res.status(401).send('Access denied, you need a web token')
     try {
         const decoded = jwt.verify(token)
         req.user = decoded
@@ -12,7 +12,7 @@ function auth(req, res, next) {
             sucess: false,
             status: 400,
             message: 'Invalid token',
-            error: error.message
+            error: ex.message
         })
     }
 }
