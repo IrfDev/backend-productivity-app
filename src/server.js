@@ -5,7 +5,7 @@ const morgan = require('morgan');
 const distractions = require('./router/distractions');
 const goals = require('./router/goals');
 const users = require('./router/users');
-const auth = require('./Middlewares/auth');
+const auth = require('./router/auth');
 const app = express();
 
 app.use(express.json())
