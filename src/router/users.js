@@ -1,5 +1,6 @@
 const express = require('express')
 const user = require('../usecases/user')
+const jwt = require('../Lib/jwt')
 
 const router = express.Router()
 
@@ -46,6 +47,8 @@ router.post('/', async(req, res) => {
     try {
         const newUserData = req.body
         const newUser = await user.create(newUserData)
+        const webToken = jwt.sign({ _id: user._id })
+        res.header('x-auth-token', webToken)
         res.json({
             success: true,
             message: 'New user created',

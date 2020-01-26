@@ -6,6 +6,7 @@ const router = express.Router()
 
 router.get('/', async(req, res) => {
     try {
+        const token = req.header('x-auth-token')
         const allGoals = await goal.getAll()
         res.json({
             sucess: true,
