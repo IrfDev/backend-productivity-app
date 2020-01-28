@@ -1,41 +1,26 @@
-require('dotenv').config()
-
-const winston = require('winston')
-require('winston-mongodb')
-
+const logger = require('./Lib/winston')
 const error = require('./Middlewares/error')
 
 const debug = require('debug')('app:startup');
 const helmet = require('helmet');
 const morgan = require('morgan');
 
-const distractions = require('./router/distractions');
-const goals = require('./router/goals');
-const users = require('./router/users');
-const auth = require('./router/auth');
-
 const express = require('express');
 const app = express();
+require('./Lib/routes')(app)
 
-const {
-    DB_USER,
-    DB_HOST,
-    DB_NAME,
-    DB_PASSWORD,
-} = process.env
 
-const uri = `mongodb+srv://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`
-
-winston.add(new winston.transports.File({ filename: 'logfile.log' }))
-winston.add(new winston.transports.MongoDB({ db: uri, level: error }))
-
-app.use(express.json())
-app.use('/users', users);
-app.use('/goals', goals);
-app.use('/distractions', distractions);
-app.use('/auth', auth)
+process.on('uncaughtException', (ex) => {
+    logger.logger.error(ex.message, ex)
+    process.exit(1)
+})
+process.on('unhandledRejection', (ex) => {
+    logger.logger.error(ex.message, ex)
+    process.exit(1)
+})
 
 app.use(error)
+    // logger.log('error', error)
 
 app.set('view engine', 'pug');
 app.set('views', './src/views');

@@ -1,6 +1,6 @@
-const winston = require('winston')
+const logger = require('../Lib/winston')
 
 module.exports = function(err, req, res, next) {
-    winston.error(err.message, err)
-    res.status(500).send('something failed')
+    logger.log(err)
+    res.status(500).send('something failed in the request ')
 }
