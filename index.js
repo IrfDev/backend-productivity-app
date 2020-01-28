@@ -1,4 +1,6 @@
 require('dotenv').config()
+const logger = require('./src/Lib/winston')
+
 
 const dbConnect = require('./src/lib/db')
 const server = require('./src/server')
@@ -14,8 +16,10 @@ const listenServer = function() {
 async function main() {
     await dbConnect()
     console.log('DB CONNECTED')
+    logger.logger.info('MONGODB CONNECTED')
     await listenServer()
     console.log(`SERVER LISTENING`)
+    logger.logger.info('SERVER LISTENING')
 }
 
 main()
@@ -24,4 +28,5 @@ main()
     })
     .catch(error => {
         console.error('ERROR', error)
+        logger.logger.error('Something wrong', error)
     })
