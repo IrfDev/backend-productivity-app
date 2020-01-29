@@ -15,7 +15,8 @@ const uri = `mongodb+srv://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`
 const logger = winston.createLogger({
     transports: [
         new winston.transports.File({ filename: 'logfile.log' }),
-        new winston.transports.MongoDB({ db: uri, level: error })
+        new winston.transports.MongoDB({ db: uri, level: error }),
+        new winston.transports.Console({ colorize: true, prettyPrint: true })
     ]
 })
 module.exports = { winston, logger }
