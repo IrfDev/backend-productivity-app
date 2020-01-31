@@ -1,4 +1,3 @@
-require('dotenv').config()
 const bcrypt = require('bcrypt')
 const { SALT_ROUND } = process.env
 
