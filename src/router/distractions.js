@@ -6,8 +6,7 @@ const router = express.Router()
 
 router.get('/', async(req, res) => {
     try {
-        const allDistractions = await distraction.
-        getAll()
+        const allDistractions = await distraction.getAll()
         res.json({
             success: true,
             message: 'All distractions',

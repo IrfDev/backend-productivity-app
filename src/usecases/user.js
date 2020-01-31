@@ -31,10 +31,6 @@ function getAll() {
         .populate('distractions', '-user', Distraction)
 }
 
-function getById(id) {
-    return User.findById(id)
-}
-
 function deletebyId(id) {
     return User.findByIdAndDelete(id)
 }

@@ -12,11 +12,11 @@ require('./Lib/routes')(app)
 
 process.on('uncaughtException', (ex) => {
     logger.logger.error(ex.message, ex)
-    process.exit(1)
+    process.exit
 })
 process.on('unhandledRejection', (ex) => {
     logger.logger.error(ex.message, ex)
-    process.exit(1)
+    process.exit
 })
 
 app.use(error)

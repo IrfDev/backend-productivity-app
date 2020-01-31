@@ -25,8 +25,9 @@
         "winston": "^3.2.1",
         "winston-mongodb": "^5.0.1"
     },
-    "description": "",
+    "description": "Package for the Productivity App Backend",
     "devDependencies": {
-        "jest": "^25.1.0"
+        "jest": "^25.1.0",
+        "supertest": "^4.0.2"
     }
 }
