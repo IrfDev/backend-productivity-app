@@ -29,7 +29,8 @@ const userSchema = new mongoose.Schema({
     role: {
         type: String,
         enum: ['admin', 'analyst'],
-        required: true
+        required: true,
+        minlength: 2
     },
     distractions: [{
         type: mongoose.Schema.Types.ObjectId,

@@ -7,6 +7,7 @@ async function create({
     name,
     email,
     age,
+    role,
     password,
 }) {
     const hash = await bcrypt.hash(password)
@@ -14,6 +15,7 @@ async function create({
         name,
         email,
         age,
+        role,
         password: hash,
     })
     return newUser.save()

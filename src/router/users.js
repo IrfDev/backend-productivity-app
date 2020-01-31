@@ -59,6 +59,7 @@ router.post('/', async(req, res) => {
                     name: newUser.name,
                     age: newUser.age,
                     email: newUser.email,
+                    role: newUser.role
                 }
             }
         })
