@@ -1,15 +1,30 @@
+const logger = require('./Lib/winston')
+const error = require('./Middlewares/error')
+
 const debug = require('debug')('app:startup');
-const express = require('express');
 const helmet = require('helmet');
 const morgan = require('morgan');
-const courses = require('./router/courses');
-const home = require('./router/home');
+
+const express = require('express');
 const app = express();
+require('./Lib/routes')(app)
 
-app.set('view engine', 'pug')
-app.set('views', './src/views')
 
-app.use(express.json())
+process.on('uncaughtException', (ex) => {
+    logger.logger.error(ex.message, ex)
+    process.exit
+})
+process.on('unhandledRejection', (ex) => {
+    logger.logger.error(ex.message, ex)
+    process.exit
+})
+
+app.use(error)
+    // logger.log('error', error)
+
+app.set('view engine', 'pug');
+app.set('views', './src/views');
+
 app.use(express.urlencoded({ extended: true }))
 app.use(helmet())
 
